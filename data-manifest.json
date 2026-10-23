@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "description": "Provenance and locally measured composition of the four preserved FASTA examples.",
+  "verification": {
+    "file_checksums": "SHA-256 of the original file bytes, including headers and whitespace.",
+    "sequence_statistics": "Calculated locally after excluding FASTA headers and whitespace and normalizing sequence letters to uppercase.",
+    "biological_annotations": "Header-derived unless a field or note explicitly identifies the filename or literature as its source.",
+    "remote_sequence_equivalence_verified": false,
+    "original_download_dates": "Unknown. No retrieval dates are present in the source files."
+  },
+  "dataset_caveats": [
+    "These examples mix genomic intervals, an mRNA record, and an aberrant exon; their GC percentages are not a matched comparison of complete genes or transcripts.",
+    "The canonical Yamanaka factors are OCT4/POU5F1, SOX2, KLF4, and MYC. The preserved Klf2.txt record identifies KLF2, a distinct gene, so these files are not a complete canonical Yamanaka-factor dataset.",
+    "GC content alone does not establish gene expression or reprogramming effectiveness."
+  ],
+  "canonical_factor_reference": "https://pubmed.ncbi.nlm.nih.gov/16904174/",
+  "files": [
+    {
+      "path": "OCT4.txt",
+      "sha256": "d4037568f225255985d540074774615945ebeced9870ad35c0d16c860a405d1e",
+      "fasta_header": ">gi|568815592:c31170693-31164337 Homo sapiens chromosome 6, GRCh38 Primary Assembly",
+      "record_count": 1,
+      "label": "OCT4",
+      "label_source": "Filename; the FASTA header itself does not name a gene.",
+      "species": "Homo sapiens",
+      "sequence_type": "Genomic interval, inferred from the chromosome header.",
+      "gi": "568815592",
+      "source_record_url": "https://www.ncbi.nlm.nih.gov/nuccore/568815592",
+      "assembly_label": "GRCh38 Primary Assembly",
+      "region": {
+        "chromosome": "6",
+        "start": 31164337,
+        "end": 31170693,
+        "strand": "-",
+        "coordinate_system": "1-based inclusive",
+        "interpretation": "The c prefix and descending coordinates in the NCBI FASTA header indicate the reverse complement."
+      },
+      "length_nt": 6357,
+      "base_counts": {"A": 1470, "C": 1601, "G": 1660, "T": 1626},
+      "non_acgt_count": 0,
+      "notes": [
+        "This fixed historical genomic interval is not a specified mRNA transcript or coding sequence, and its boundaries should not be treated as a current gene annotation."
+      ]
+    },
+    {
+      "path": "SOX2.txt",
+      "sha256": "b4618cb9b4ba717e2a0360a2ab51f6f5cc66930cab8d10f99bc52cd574306090",
+      "fasta_header": ">gi|568815595:181711924-181714436 Homo sapiens chromosome 3, GRCh38 Primary Assembly",
+      "record_count": 1,
+      "label": "SOX2",
+      "label_source": "Filename; the FASTA header itself does not name a gene.",
+      "species": "Homo sapiens",
+      "sequence_type": "Genomic interval, inferred from the chromosome header.",
+      "gi": "568815595",
+      "source_record_url": "https://www.ncbi.nlm.nih.gov/nuccore/568815595",
+      "assembly_label": "GRCh38 Primary Assembly",
+      "region": {
+        "chromosome": "3",
+        "start": 181711924,
+        "end": 181714436,
+        "strand": "+",
+        "coordinate_system": "1-based inclusive",
+        "interpretation": "Ascending coordinates without a c prefix in the NCBI FASTA header indicate the forward interval."
+      },
+      "length_nt": 2513,
+      "base_counts": {"A": 693, "C": 619, "G": 655, "T": 546},
+      "non_acgt_count": 0,
+      "notes": [
+        "The source identifies a genomic interval rather than a specific transcript or isolated coding sequence."
+      ]
+    },
+    {
+      "path": "Klf2.txt",
+      "sha256": "5d4c5e1a76bd5c10d99d65fd85e4524adfb0b21f13c9efc13368e6253ed85692",
+      "fasta_header": ">gi|49574523|ref|NM_016270.2| Homo sapiens Kruppel-like factor 2 (KLF2), mRNA",
+      "record_count": 1,
+      "label": "KLF2",
+      "label_source": "FASTA header.",
+      "species": "Homo sapiens",
+      "sequence_type": "mRNA record represented with the DNA alphabet.",
+      "gi": "49574523",
+      "accession_version": "NM_016270.2",
+      "source_record_url": "https://www.ncbi.nlm.nih.gov/nuccore/NM_016270.2",
+      "length_nt": 1655,
+      "base_counts": {"A": 250, "C": 622, "G": 493, "T": 290},
+      "non_acgt_count": 0,
+      "notes": [
+        "KLF2 is distinct from KLF4, the factor in the canonical Yamanaka combination; this record must not be relabeled as KLF4."
+      ]
+    },
+    {
+      "path": "c-Myc.txt",
+      "sha256": "4c3c39ded19a0b84961260733aa4d3b6a7a980959540cb0ffb52cae2715bc7ca",
+      "fasta_header": ">gi|29996|emb|X00676.1| Human aberrant c-myc exon 2 from LY67 Burkitt lymphoma cells",
+      "record_count": 1,
+      "label": "c-myc",
+      "label_source": "FASTA header.",
+      "species": "Homo sapiens",
+      "species_source": "Normalized from Human in the FASTA header.",
+      "sequence_type": "Aberrant exon 2 nucleotide sequence.",
+      "gi": "29996",
+      "accession_version": "X00676.1",
+      "source_record_url": "https://www.ncbi.nlm.nih.gov/nuccore/X00676.1",
+      "sample_description": "LY67 Burkitt lymphoma cells",
+      "length_nt": 961,
+      "base_counts": {"A": 187, "C": 348, "G": 253, "T": 173},
+      "non_acgt_count": 0,
+      "notes": [
+        "This is labeled as an aberrant exon from a lymphoma cell line, not a normal complete MYC gene or transcript."
+      ]
+    }
+  ]
+}
