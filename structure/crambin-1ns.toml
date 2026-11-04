@@ -1,0 +1,30 @@
+name = "crambin-1ns"
+description = "Crambin (PDB 1CRN): 1 ns Langevin MD at 300 K on CUDA, then Ca RMSD, RMSF and radius of gyration"
+
+# Run with the OpenMM environment active, so `python` is its interpreter.
+[[step]]
+name = "environment"
+command = ["python", "-m", "pip", "freeze"]
+outputs = ["environment.txt"]
+stdout = "environment.txt"
+
+[[step]]
+name = "fetch"
+command = ["curl", "-fsSL", "https://files.rcsb.org/download/1CRN.pdb", "-o", "1crn.pdb"]
+outputs = ["1crn.pdb"]
+# The file experiments 001 and 002 used (2026-10-13). If RCSB reissues it, this step fails on purpose.
+expect = ["42199a30a0701864a2a5cc76cd7f35cc544cd0e65fbcf63e03c166543249b811  1crn.pdb"]
+
+[[step]]
+name = "simulate"
+command = ["python", "{pipeline_dir}/simulate.py", "--steps", "500000", "--dcd-interval", "5000"]
+inputs = ["1crn.pdb", "{pipeline_dir}/simulate.py"]
+outputs = ["initial.pdb", "trajectory.dcd", "final.pdb"]
+stdout = "simulation.log"
+
+[[step]]
+name = "analyze"
+command = ["python", "{pipeline_dir}/analyze.py"]
+inputs = ["initial.pdb", "trajectory.dcd", "{pipeline_dir}/analyze.py"]
+outputs = ["trajectory_analysis.png", "crambin_rmsf.pdb"]
+stdout = "analysis.log"

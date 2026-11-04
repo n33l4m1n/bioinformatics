@@ -1,0 +1,30 @@
+#!/bin/sh
+# Refuses to push private material. Private notes (roadmap, research frontier) live outside this repository;
+# this hook is the second check after .gitignore. Install once per clone:
+#   git config core.hooksPath .githooks
+# Blocks a push when a pushed commit touches a private file name, or adds a line carrying the private-note marker.
+set -eu
+
+marker="Business IP"": private"
+private_names='(^|/)(ROADMAP|FRONTIER)\.md$|(^|/)[^/]*-(roadmap|frontier)\.md$|(^|/)private/'
+status=0
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case $local_sha in *[!0]*) ;; *) continue ;; esac   # branch deletion
+  case $remote_sha in
+    *[!0]*) set -- "$remote_sha..$local_sha" ;;
+    *) set -- "$local_sha" --not --remotes ;;          # new branch: only commits the remote lacks
+  esac
+
+  names=$(git log --format= --name-only "$@" | grep -E -i "$private_names" | sort -u || true)
+  if [ -n "$names" ]; then
+    echo "pre-push: refusing $local_ref -> $remote_ref; private file names:" >&2
+    printf '%s\n' "$names" | sed 's/^/  /' >&2
+    status=1
+  fi
+  if git log -p --format= "$@" | grep -E '^\+' | grep -q -F "$marker"; then
+    echo "pre-push: refusing $local_ref -> $remote_ref; a commit adds the private-note marker" >&2
+    status=1
+  fi
+done
+exit $status

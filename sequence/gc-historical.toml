@@ -1,0 +1,14 @@
+name = "gc-historical"
+description = "GC report (JSON) on the four bundled historical FASTA examples"
+
+[[step]]
+name = "report"
+command = ["python3", "{pipeline_dir}/gc_content.py", "--format", "json"]
+inputs = [
+  "{pipeline_dir}/OCT4.txt",
+  "{pipeline_dir}/SOX2.txt",
+  "{pipeline_dir}/Klf2.txt",
+  "{pipeline_dir}/c-Myc.txt",
+]
+outputs = ["gc-report.json"]
+stdout = "gc-report.json"

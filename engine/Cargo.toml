@@ -1,0 +1,13 @@
+[package]
+name = "biorun"
+version = "0.1.0"
+edition = "2021"
+# athena builds with Ubuntu's cargo 1.75; no dependencies so it builds offline anywhere.
+rust-version = "1.75"
+description = "Runs research pipelines step by step and records their provenance"
+publish = false
+
+[dependencies]
+
+[profile.release]
+debug = false
