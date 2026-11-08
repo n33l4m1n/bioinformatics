@@ -1,0 +1,4 @@
+# Every change needs the owner's review. The agent App (n33l4m1n-agent[bot]) opens PRs but never approves or merges.
+# CI, release and signing paths are listed explicitly so they stay owner-only if the default rule ever narrows.
+* @n33l4m1n
+/.github/ @n33l4m1n
