@@ -7,3 +7,4 @@ runs/
 # Private notes live outside the repository; .githooks/pre-push is the second check.
 FRONTIER.md
 ROADMAP.md
+private/
